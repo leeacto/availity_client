@@ -7,18 +7,20 @@ describe ".issue_request" do
 
   it "raises an error without AVAILITY_API_KEY Env Var" do
     ENV['AVAILITY_API_KEY'] = nil
+
     expect{
       AvailityClient.issue_request('get', 'http://example.com', {})
-    }.to raise_error AvailityClient::MissingApiKey
+    }.to raise_error MissingApiKey
   end
 
   it "issues request based on provided parameters" do
-    method = 'get'
+    method = 'post'
     url = 'http://example.com'
     params = { foo: 'bar' }
 
     expect(URI).to receive(:parse).with(url).and_call_original
-    expect_any_instance_of(Faraday::Connection).to receive(:get)
+    expect_any_instance_of(Faraday::Connection).to receive(method.to_sym)
+
     AvailityClient.issue_request(method, url, params)
   end
 end

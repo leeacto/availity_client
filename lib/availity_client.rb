@@ -18,7 +18,7 @@ module AvailityClient
       faraday.adapter  Faraday.default_adapter
     end
 
-    response = conn.get do |req|
+    response = conn.send(method.to_sym) do |req|
       req.headers['x-api-key'] = api_key
 
       if params.any?
