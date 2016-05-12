@@ -10,7 +10,7 @@ describe ".issue_request" do
 
     expect{
       AvailityClient.issue_request('get', 'http://example.com', {})
-    }.to raise_error MissingApiKey
+    }.to raise_error MissingApiKeyError
   end
 
   it "issues request based on provided parameters" do

@@ -7,6 +7,12 @@ module AvailityClient
 
         AvailityClient.issue_request('get', url, args)
       end
+
+      def delete(id)
+        url = "#{AvailityClient::BASE_URL}coverages/#{id}"
+
+        AvailityClient.issue_request('delete', url, {})
+      end
     end
   end
 end

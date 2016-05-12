@@ -1,4 +1,3 @@
-require 'net/http'
 require 'availity_client/coverage'
 require 'faraday'
 require 'json'
@@ -6,11 +5,11 @@ require 'json'
 module AvailityClient
   BASE_URL = "https://api.availity.com/#{"demo/" unless ENV['RACK_ENV'] == 'production'}v1/"
 
-  class MissingApiKey < StandardError; end
+  class MissingApiKeyError < StandardError; end
 
   def self.issue_request(method, url, params)
     api_key = ENV['AVAILITY_API_KEY']
-    raise MissingApiKey, "AVAILITY_API_KEY Env Var must be set" unless api_key
+    raise MissingApiKeyError, "AVAILITY_API_KEY Env Var must be set" unless api_key
 
     uri = URI.parse(url)
     conn = Faraday.new(url: uri) do |faraday|

@@ -38,4 +38,18 @@ describe Coverage do
       expect(response[:body]['id']).to eq '123'
     end
   end
+
+  describe ".delete" do
+    it "requires an ID" do
+      expect{
+        Coverage.delete
+      }.to raise_error
+    end
+
+    it "issues request with correct params" do
+      expect(AvailityClient).to receive(:issue_request)
+        .with('delete', "https://api.availity.com/demo/v1/coverages/123", {})
+        Coverage.delete(123)
+    end
+  end
 end
