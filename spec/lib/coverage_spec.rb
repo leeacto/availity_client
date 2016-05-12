@@ -23,6 +23,11 @@ describe Coverage do
         expect(response[:status]).to eq 200
         expect(response[:body]).not_to be_nil
       end
+
+      it "makes proper HTTP request given parameters" do
+        stub_params_coverage_index_request
+        response = Coverage.get(patientLastName: "Parker", patientFirstName: 'Peter')
+      end
     end
   end
 end

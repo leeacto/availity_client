@@ -4,3 +4,10 @@ def stub_coverage_index_response
   response = OpenStruct.new(body: body.to_json, status: 200)
   allow_any_instance_of(Faraday::Connection).to receive(:get).and_return(response)
 end
+
+def stub_params_coverage_index_request
+  body = {"totalCount" =>  1,"count" =>  1,"offset" =>  0,"limit" =>  1,"links" =>  {"self" =>  {"href" =>  "https => //api.availity.com/demo/v1/coverages?payerId=BCBSF&providerNpi=1234567893&memberId=H39522358&patientLastName=KOVAL&patientFirstName=GEORGE&submitterId=G2509&serviceType=30&patientBirthDate=1999-01-01"}},"coverages" =>  [{"links" =>  {"self" =>  {"href" =>  "https => //api.availity.com/demo/v1/coverages/123"}},"id" =>  "123","customerId" =>  "4321","controlNumber" =>  "9876543","status" =>  "Complete","statusCode" =>  "4","createdDate" =>  "2014-10-15T16 => 31 => 07.000+0000","updatedDate" =>  "2014-10-15T16 => 31 => 07.000+0000","expirationDate" =>  "2014-10-16T16 => 31 => 07.000+0000","asOfDate" =>  "2014-10-15T04 => 00 => 00.000+0000","requestedServiceType" =>  [{"code" =>  "30","value" =>  "Health Benefit Plan Coverage"}],"validationMessages" =>  [],"subscriber" =>  {"firstName" =>  "Peter","lastName" =>  "Parker","memberId" =>  "PBHR123456","gender" =>  "Female","genderCode" =>  "F","birthDate" =>  "1990-01-01"},"patient" =>  {"firstName" =>  "Peter","lastName" =>  "Parker","subscriberRelationship" =>  "Self","subscriberRelationshipCode" =>  "18","gender" =>  "Female","genderCode" =>  "F","birthDate" =>  "1990-01-01"},"payer" =>  {"name" =>  "BCBSF","payerId" =>  "BCBSF"},"requestingProvider" =>  {"npi" =>  "1234567893","taxId" =>  "123456789"},"plans" =>  [{"status" =>  "Active - Services Capitated","statusCode" =>  "3"}]}]}
+
+  response = OpenStruct.new(body: body.to_json, status: 200)
+  allow_any_instance_of(Faraday::Connection).to receive(:get).and_return(response)
+end

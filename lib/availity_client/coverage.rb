@@ -13,6 +13,10 @@ module AvailityClient
 
         response = conn.get do |req|
           req.headers['x-api-key'] = api_key
+
+          if args.any?
+            args.first.each { |key, value| req.params[key.to_s] = value }
+          end
         end
 
         {
