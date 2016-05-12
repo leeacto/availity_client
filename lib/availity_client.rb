@@ -25,5 +25,10 @@ module AvailityClient
         params.first.each { |key, value| req.params[key.to_s] = value }
       end
     end
+
+    {
+      status: response.status,
+      body: JSON.parse(response.body)
+    }
   end
 end

@@ -1,8 +1,7 @@
 require 'bundler/setup'
 require 'pry'
-Bundler.setup
-
 require 'availity_client'
+Bundler.setup
 
 RSpec.configure do |config|
   config.warnings = true

@@ -19,7 +19,8 @@ describe ".issue_request" do
     params = { foo: 'bar' }
 
     expect(URI).to receive(:parse).with(url).and_call_original
-    expect_any_instance_of(Faraday::Connection).to receive(method.to_sym)
+    expect_any_instance_of(Faraday::Connection).to receive(:post)
+      .and_return(OpenStruct.new(status: 200, body: {}.to_json))
 
     AvailityClient.issue_request(method, url, params)
   end
