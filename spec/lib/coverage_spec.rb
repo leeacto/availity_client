@@ -27,7 +27,21 @@ describe Coverage do
       it "makes proper HTTP request given parameters" do
         stub_params_coverage_index_request
         response = Coverage.get(patientLastName: "Parker", patientFirstName: 'Peter')
+
+        expect(response[:status]).to eq 200
+        expect(response[:body]).not_to be_nil
       end
+    end
+
+    it "requests coverages by ID" do
+      stub_single_coverage_request
+      expect(URI).to receive(:parse).with("https://api.availity.com/demo/v1/coverages/123").and_call_original
+
+      response = Coverage.get(123)
+
+      expect(response[:status]).to eq 200
+      expect(response[:body]).not_to be_nil
+      expect(response[:body]['id']).to eq '123'
     end
   end
 end
