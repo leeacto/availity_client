@@ -19,9 +19,13 @@ describe ".issue_request" do
     params = { foo: 'bar' }
 
     expect(URI).to receive(:parse).with(url).and_call_original
-    expect_any_instance_of(Faraday::Connection).to receive(:post)
-      .and_return(OpenStruct.new(status: 200, body: {}.to_json))
+    allow_any_instance_of(Faraday::Connection).to receive(:post)
+      .and_return(OpenStruct.new(status: 200, body: { foo: 'bar' }.to_json), headers: { "x-response" => "ok" })
 
-    AvailityClient.issue_request(method, url, params)
+    response = AvailityClient.issue_request(method, url, params)
+
+    expect(response).to have_key(:headers)
+    expect(response[:status]).to eq 200
+    expect(response[:body]).to eq({ 'foo' => 'bar' })
   end
 end

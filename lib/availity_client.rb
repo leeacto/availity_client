@@ -1,6 +1,7 @@
 require 'availity_client/coverage'
 require 'faraday'
 require 'json'
+require 'uri'
 
 module AvailityClient
   BASE_URL = "https://api.availity.com/#{"demo/" unless ENV['RACK_ENV'] == 'production'}v1/"
@@ -25,9 +26,15 @@ module AvailityClient
       end
     end
 
+    response_body = begin
+                      JSON.parse(response.body)
+                    rescue JSON::ParserError => e
+                      response.body
+                    end
     {
+      headers: response.headers,
       status: response.status,
-      body: JSON.parse(response.body)
+      body: response_body
     }
   end
 end
