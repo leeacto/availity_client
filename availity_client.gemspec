@@ -6,9 +6,11 @@ Gem::Specification.new do |s|
   s.description = "HTTP wrapper for Availity API"
   s.authors     = ["Nicholas Lee"]
   s.email       = 'nicholas.lee.3@gmail.com'
-  s.files       = ["lib/availity_client.rb"]
+  s.files       = ["lib/availity_client.rb", "lib/availity_client/coverage.rb"]
   s.homepage    = 'https://github.com/leeacto/availity_client'
   s.license       = 'MIT'
+
+  s.add_dependency 'faraday'
 
   s.add_development_dependency "bundler"
   s.add_development_dependency "rake"
