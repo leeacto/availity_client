@@ -5,16 +5,20 @@ require 'uri'
 require 'base64'
 
 module AvailityClient
-  BASE_URL = "https://api.availity.com/#{"demo/" unless ENV['AVAILITY_API_SECRET'] == 'production'}v1/"
-
   class MissingApiKeyError < StandardError; end
 
   class << self
+    def base_url
+      "https://api.availity.com/#{premium_key? ? '' : 'demo/'}v1/"
+    end
+
     def premium_key?
       !!ENV['AVAILITY_API_KEY'] && !!ENV['AVAILITY_API_SECRET']
     end
 
     def generate_token
+      raise MissingApiKeyError, "AVAILITY_API_KEY and AVAILITY_API_SECRET  Environment Variables must be set" unless ENV['AVAILITY_API_KEY'] && ENV['AVAILITY_API_SECRET']
+
       base_64_token = Base64.encode64(ENV['AVAILITY_API_KEY'] + ":" + ENV['AVAILITY_API_SECRET']).chomp
       conn = Faraday.new(url: "https://api.availity.com") do |faraday|
         faraday.response :logger
@@ -41,7 +45,11 @@ module AvailityClient
       end
 
       response = conn.send(method.to_sym) do |req|
-        req.headers['x-api-key'] = api_key
+        if premium_key?
+          req.headers['Authorization'] = "Bearer #{generate_token}"
+        else
+          req.headers['x-api-key'] = api_key
+        end
 
         if params.any?
           params.first.each { |key, value| req.params[key.to_s] = value }

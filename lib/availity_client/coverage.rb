@@ -3,13 +3,13 @@ module AvailityClient
     class << self
       def get(* args)
         id = args.shift.to_s if args.first.kind_of?(Integer)
-        url = "#{AvailityClient::BASE_URL}coverages#{"/" + id if id}"
+        url = "#{AvailityClient.base_url}coverages#{"/" + id if id}"
 
         AvailityClient.issue_request('get', url, args)
       end
 
       def delete(id)
-        url = "#{AvailityClient::BASE_URL}coverages/#{id}"
+        url = "#{AvailityClient.base_url}coverages/#{id}"
 
         AvailityClient.issue_request('delete', url, {})
       end

@@ -1,6 +1,20 @@
 require 'spec_helper'
 
 describe AvailityClient do
+  describe ".base_url" do
+    it "returns demo version if .premium_key? is false" do
+      ENV['AVAILITY_API_KEY'] = 'fakeApiKeyHere'
+      ENV['AVAILITY_API_SECRET'] = nil
+      expect(AvailityClient.base_url).to eq "https://api.availity.com/demo/v1/"
+    end
+
+    it "returns standard version if .premium_key? is true" do
+      ENV['AVAILITY_API_KEY'] = 'fakeApiKeyHere'
+      ENV['AVAILITY_API_SECRET'] = 'secretKey'
+      expect(AvailityClient.base_url).to eq "https://api.availity.com/v1/"
+    end
+  end
+
   describe ".premium_key?" do
     it "returns true if AVAILITY_API_KEY and AVAILITY_API_SECRET variables are present" do
       ENV['AVAILITY_API_KEY'] = 'fakeApiKeyHere'
@@ -22,6 +36,18 @@ describe AvailityClient do
   end
 
   describe ".generate_token" do
+    it "raises an error when AVAILITY_API_SECRET is missing" do
+      ENV['AVAILITY_API_KEY'] = 'fakeApiKeyHere'
+      ENV['AVAILITY_API_SECRET'] = nil
+      expect{ AvailityClient.generate_token }.to raise_error MissingApiKeyError
+    end
+
+    it "raises an error when AVAILITY_API_KEY is missing" do
+      ENV['AVAILITY_API_KEY'] = nil
+      ENV['AVAILITY_API_SECRET'] = 'secretKey'
+      expect{ AvailityClient.generate_token }.to raise_error MissingApiKeyError
+    end
+
     it "returns an Availity Oauth Token" do
       ENV['AVAILITY_API_KEY'] = 'fakeApiKeyHere'
       ENV['AVAILITY_API_SECRET'] = 'secretKey'
