@@ -1,5 +1,5 @@
-require 'availity_client/coverage'
-require 'availity_client/configuration'
+require './lib/availity_client/coverage'
+require './lib/availity_client/configuration'
 require 'faraday'
 require 'json'
 require 'uri'

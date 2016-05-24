@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'availity_client'
-  s.version     = '0.2.0'
+  s.version     = AvailityClient::VERSION
   s.date        = '2016-05-11'
   s.summary     = "Availity API REST Client"
   s.description = "HTTP wrapper for Availity API"

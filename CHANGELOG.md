@@ -1,5 +1,9 @@
 ### AvailityClient Version Changelog
 
+#### Version 0.2.1
+* Date: 2016-05-24
+* Fix requirement issue
+
 #### Version 0.2.0
 * Date: 2016-05-24
 * Add class to access `GET /configurations`
