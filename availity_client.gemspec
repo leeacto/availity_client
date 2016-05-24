@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.license       = 'MIT'
 
   s.add_dependency 'faraday', '~> 0.9.0'
+  s.add_dependency 'require_all'
 
   s.add_development_dependency "bundler"
   s.add_development_dependency "rake"

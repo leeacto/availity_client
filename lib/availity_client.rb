@@ -1,9 +1,10 @@
-require './lib/availity_client/coverage'
-require './lib/availity_client/configuration'
+require 'require_all'
 require 'faraday'
 require 'json'
 require 'uri'
 require 'base64'
+
+require_rel "./"
 
 module AvailityClient
   class MissingApiKeyError < StandardError; end
