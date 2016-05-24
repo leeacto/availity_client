@@ -1,3 +1,5 @@
+require './lib/availity_client/version'
+
 Gem::Specification.new do |s|
   s.name        = 'availity_client'
   s.version     = AvailityClient::VERSION
