@@ -1,5 +1,9 @@
 ### AvailityClient Version Changelog
 
+#### Version 0.3.1
+* Date: 2016-05-24
+* Fix Coverage args issue
+
 #### Version 0.3.0
 * Date: 2016-05-24
 * use require_all gem

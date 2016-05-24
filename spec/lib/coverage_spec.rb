@@ -19,11 +19,13 @@ describe Coverage do
       end
 
       it "makes proper HTTP request given parameters" do
-        stub_params_coverage_index_request
-        response = Coverage.get(patientLastName: "Parker", patientFirstName: 'Peter')
+        expect(AvailityClient).to receive(:issue_request).with(
+          'get',
+          "https://api.availity.com/demo/v1/coverages",
+          { patientLastName: "Parker", patientFirstName: 'Peter' }
+        ).and_return nil
 
-        expect(response[:status]).to eq 200
-        expect(response[:body]).not_to be_nil
+        Coverage.get(patientLastName: "Parker", patientFirstName: 'Peter')
       end
     end
 
