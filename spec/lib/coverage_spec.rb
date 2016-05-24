@@ -41,9 +41,7 @@ describe Coverage do
 
   describe ".delete" do
     it "requires an ID" do
-      expect{
-        Coverage.delete
-      }.to raise_error
+      expect{ Coverage.delete }.to raise_error
     end
 
     it "issues request with correct params" do

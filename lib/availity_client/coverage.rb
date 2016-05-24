@@ -2,9 +2,12 @@ module AvailityClient
   class Coverage
     class << self
       def get(* args)
-        id = args.shift.to_s if args.first.kind_of?(Integer)
-        url = "#{AvailityClient.base_url}coverages#{"/" + id if id}"
+        if args.first.kind_of?(Integer)
+          id = args.shift.to_s
+          args = args.first
+        end
 
+        url = "#{AvailityClient.base_url}coverages#{"/" + id if id}"
         AvailityClient.issue_request('get', url, args)
       end
 

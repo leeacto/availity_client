@@ -1,4 +1,5 @@
 require 'availity_client/coverage'
+require 'availity_client/configuration'
 require 'faraday'
 require 'json'
 require 'uri'
@@ -52,7 +53,7 @@ module AvailityClient
         end
 
         if params.any?
-          params.first.each { |key, value| req.params[key.to_s] = value }
+          params.each { |key, value| req.params[key.to_s] = value }
         end
       end
 
