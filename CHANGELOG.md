@@ -1,5 +1,9 @@
 ### AvailityClient Version Changelog
 
+#### Version 0.3.2
+* Date: 2016-05-26
+* Fix GET /:id bug
+
 #### Version 0.3.1
 * Date: 2016-05-24
 * Fix Coverage args issue

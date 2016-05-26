@@ -53,7 +53,7 @@ module AvailityClient
           req.headers['x-api-key'] = api_key
         end
 
-        if params.any?
+        if params.kind_of?(Hash)
           params.each { |key, value| req.params[key.to_s] = value }
         end
       end
